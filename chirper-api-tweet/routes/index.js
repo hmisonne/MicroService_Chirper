@@ -5,5 +5,6 @@ let tweet = require('../controllers/tweet')
 
 /* GET home page. */
 router.get('/', tweet.get_tweets);
+router.post('/',tweet.submit_tweet)
 
 module.exports = router;
