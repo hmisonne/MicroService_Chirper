@@ -6,3 +6,7 @@ block content
 	form(action="/", method="POST")
 		input(name="tweet_text", type="tweet", placeholder="enter your tweet")
 		button(type="submit") Submit
+	if tweets
+		h1 Tweets
+		for tweet in tweets
+			p #{tweet.content}
