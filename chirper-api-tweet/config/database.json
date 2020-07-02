@@ -1,4 +1,4 @@
-module.exports = {
+{
   "development": {
     "username": "express-chirper-dbuser",
     "password": "123.456",
