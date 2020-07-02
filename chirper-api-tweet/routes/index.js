@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-let index = require('../controllers/index')
+let tweet = require('../controllers/tweet')
 
 /* GET home page. */
-router.get('/', index.index);
+router.get('/', tweet.get_tweets);
 
 module.exports = router;
