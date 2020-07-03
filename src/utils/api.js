@@ -39,9 +39,10 @@ export async function _getTweetsv2 () {
     },
   })
   const tweetList = await response.json()
-  console.log('t',tweetList)
   let tweetObject = {}
-  tweetList.map(tweet => tweetList[tweet.id] = tweet)
+  for (const tweet of tweetList){
+    tweetObject[tweet.id] = tweet
+  }
   return tweetObject
   
 }
