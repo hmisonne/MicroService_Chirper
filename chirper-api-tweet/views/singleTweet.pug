@@ -2,5 +2,6 @@ extends layout
 
 block content
 	h1 Tweet
-	p #{tweet.content}
-	p #{tweet.createdAt}
+	p 
+		span #{tweet.content} #{tweet.createdAt}
+		a(href="/tweet/"+ tweet.id + "/edit") Edit

@@ -1,0 +1,6 @@
+extends ../layout
+
+block content
+	form(action="/tweet/" + tweet.id + "/edit", method="POST")
+		input(name="tweet_text", type="tweet", placeholder="enter your tweet" value=tweet.content)
+		button(type="submit") Save

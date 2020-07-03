@@ -31,3 +31,37 @@ exports.show_tweet = function(req, res, next) {
   })
   
 }
+
+exports.show_tweet = function(req, res, next) {
+  return models.TweetItem.findOne({
+	  where: {
+	  		id: req.params.tweet_id
+	  	}
+	  }).then(tweet => {
+  	res.render('singleTweet',{tweet})
+  })
+  
+}
+
+exports.show_edit_tweet = function(req, res, next) {
+	return models.TweetItem.findOne({
+	  	where: {
+	  		id: req.params.tweet_id
+	  	}
+	  }).then(tweet => {
+  	res.render('tweet/edit_tweet',{tweet})
+  })
+}
+
+
+exports.edit_tweet = function(req, res, next) {
+	return models.TweetItem.update({
+	  	content: req.body.tweet_text
+	  }, {
+	  	where: {
+	  		id: req.params.tweet_id
+	  	}
+	  }).then(result => {
+	  	res.redirect('/tweet/'+ req.params.tweet_id);
+	  })
+}
