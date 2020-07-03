@@ -1,9 +1,0 @@
-extends layout
-
-block content
-	h1 Tweet
-	p 
-		span #{tweet.content} #{tweet.createdAt}
-		a(href="/tweet/"+ tweet.id + "/edit") Edit
-		form(action="/tweet/"+ tweet.id + '/delete', method="POST" )
-			button(type="submit") Delete
