@@ -10,5 +10,5 @@ router.get('/tweets',tweet.show_tweets);
 router.get('/tweet/:tweet_id',tweet.show_tweet);
 router.get('/tweet/:tweet_id/edit',tweet.show_edit_tweet);
 router.post('/tweet/:tweet_id/edit',tweet.edit_tweet);
-
+router.post('/tweet/:tweet_id/delete',tweet.delete_tweet);
 module.exports = router;

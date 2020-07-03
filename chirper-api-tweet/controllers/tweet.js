@@ -65,3 +65,13 @@ exports.edit_tweet = function(req, res, next) {
 	  	res.redirect('/tweet/'+ req.params.tweet_id);
 	  })
 }
+
+exports.delete_tweet = function(req, res, next) {
+	return models.TweetItem.destroy({
+	  	where: {
+	  		id: req.params.tweet_id
+	  	}
+	  }).then(result => {
+	  	res.redirect('/tweets/');
+	  })
+}
