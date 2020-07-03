@@ -5,7 +5,7 @@ let tweet = require('../controllers/tweet')
 
 /* GET home page. */
 
-router.post('/',tweet.submit_tweet);
+router.post('/tweets',tweet.submit_tweet);
 router.get('/tweets',tweet.show_tweets);
 router.get('/tweets/:tweet_id',tweet.show_tweet);
 
