@@ -7,12 +7,12 @@
 var app = require('../app');
 var debug = require('debug')('chirper-api-tweet:server');
 var http = require('http');
-let models = require('../models');
+let models = require('../controllers/v0/tweet/models');
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '8080');
 app.set('port', port);
 
 /**
