@@ -1,15 +1,16 @@
 import {
   _getUsers,
-  _getTweets,
   _saveLikeToggle,
   _saveTweet,
   _removeTweet,
 } from './_DATA.js'
 
+import { apiEndpoint } from '../config'
+
 export function getInitialData () {
   return Promise.all([
     _getUsers(),
-    _getTweets(),
+    _getTweetsv2(),
   ]).then(([users, tweets]) => ({
     users,
     tweets,
@@ -26,4 +27,21 @@ export function saveTweet (info) {
 
 export function removeTweet (tweet) {
   return _removeTweet(tweet)
+}
+
+export async function _getTweetsv2 () {
+  console.log('Fetching tweets')
+  const response = await fetch(`${apiEndpoint}/`,{
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+  const tweetList = await response.json()
+  console.log('t',tweetList)
+  let tweetObject = {}
+  tweetList.map(tweet => tweetList[tweet.id] = tweet)
+  return tweetObject
+  
 }
