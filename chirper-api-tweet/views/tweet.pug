@@ -9,4 +9,7 @@ block content
 	if tweets
 		h1 Tweets
 		for tweet in tweets
-			p #{tweet.content}
+			p 
+				span #{tweet.content}
+				|
+				a(href="/tweet/" + tweet.id) Details
