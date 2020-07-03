@@ -5,7 +5,8 @@ const models = require('../models')
 
 exports.submit_tweet = function(req, res, next) {
   return models.TweetItem.create({
-  	content: req.body.tweet_text
+  	text: req.body.tweet_text,
+  	author: req.body.tweet_author,
   }).then(tweet => {
   	res.status(201).send({msg: "Success", tweet})
   })
@@ -34,7 +35,7 @@ exports.show_tweet = function(req, res, next) {
 
 exports.edit_tweet = function(req, res, next) {
 	return models.TweetItem.update({
-	  	content: req.body.tweet_text
+	  	text: req.body.tweet_text
 	  }, {
 	  	where: {
 	  		id: req.params.tweet_id

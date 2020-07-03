@@ -4,12 +4,28 @@ module.exports = {
     return queryInterface.createTable('TweetItem', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
-      content: {
+      text: {
         allowNull: false,
+        type: Sequelize.STRING,
+      },
+      author:{
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      replies:{
+        allowNull: true,
+        type: Sequelize.ARRAY(Sequelize.STRING),
+      },
+      likes:{
+        allowNull: true,
+        type: Sequelize.ARRAY(Sequelize.STRING),
+      },
+      replyingTo:{
+        allowNull: true,
         type: Sequelize.STRING,
       },
       createdAt: {
