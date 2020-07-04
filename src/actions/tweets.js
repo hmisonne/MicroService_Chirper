@@ -45,10 +45,10 @@ export function addTweet(tweet) {
 export function handleDeleteTweet(tweet) {
 	return (dispatch) => {
 		dispatch(deleteTweet(tweet))
-		return removeTweet(tweet)
+		return removeTweet(tweet.id)
 			.catch(e => {
 				console.warn('Error in handleDeleteTweet: ',e)
-				dispatch(addTweet(tweet.text, tweet.replyingTo))
+				dispatch(handleAddTweets(tweet.text, tweet.replyingTo))
 				alert('There was an error deleting the tweet. Try again')
 			})
 	}
@@ -80,7 +80,8 @@ export function handleAddTweets(text, replyingTo) {
 			text, 
 			replyingTo
 		})
-		.then((tweet)=> dispatch(addTweet(tweet)))
+		.then((response)=> response.json())
+		.then(data => dispatch(addTweet(data.tweet)))
 		.then(()=> dispatch(hideLoading()))
 	}
 }

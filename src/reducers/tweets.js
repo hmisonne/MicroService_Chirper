@@ -45,6 +45,7 @@ export default function tweets (state={}, action) {
 
 		case DELETE_TWEET:
 			const tweet2 = action.tweet
+			console.log('curr tweet', tweet2)
 			let replyingToTweet = {}
 			if (tweet2.parent !== null) {
 				replyingToTweet = {
