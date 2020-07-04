@@ -37,7 +37,7 @@ The following endpoints are available:
 
 | Endpoint       | Usage          | Params         |
 |-----------------|----------------|----------------|
-| `GET /tweet` | Get all of the tweets | &nbsp |
+| `GET /tweet` | Get all of the tweets | |
 
 Example Response:
 
@@ -67,7 +67,7 @@ Example Response:
 ```
 | Endpoint       | Usage          | Params         |
 |-----------------|----------------|----------------|
-| `GET /tweet/:id` | Get the details of a single tweet | &nbsp |
+| `GET /tweet/:id` | Get the details of a single tweet | |
 
 Example Response:
 
@@ -88,15 +88,15 @@ Example Response:
 ```
 | Endpoint       | Usage          | Params         |
 |-----------------|----------------|----------------|
-| `POST /tweet` | Create a new tweet | **text** - [String] <br> **author** - [String] <br> **replyingTo** (optional) - Should match a tweet id in the database. &nbsp |
+| `POST /tweet` | Create a new tweet | **text** - [String] <br> **author** - [String] <br> **replyingTo** (optional) - Should match a tweet id in the database. |
 
 | Endpoint       | Usage          | Params         |
 |-----------------|----------------|----------------|
-| `DELETE /tweet/:id` | Remove a tweet from the database | &nbsp |
+| `DELETE /tweet/:id` | Remove a tweet from the database | |
 
 | Endpoint       | Usage          | Params         |
 |-----------------|----------------|----------------|
-| `PATCH /tweet/:id` | Edit Tweet Text, or add replies, likes | **text** (optional) - [String] TBD . &nbsp |
+| `PATCH /tweet/:id` | Edit Tweet Text, or add replies, likes | **text** (optional) - [String] TBD . |
 
 ## Acknowledgements
 
