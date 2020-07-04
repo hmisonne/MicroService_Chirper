@@ -4,8 +4,8 @@ const models = require('../models')
 
 exports.submit_tweet = function(req, res, next) {
   return models.TweetItem.create({
-  	text: req.body.tweet_text,
-  	author: req.body.tweet_author,
+  	text: req.body.text,
+  	author: req.body.author,
   }).then(tweet => {
   	res.status(201).send({msg: "Success", tweet})
   })
