@@ -1,6 +1,8 @@
 'use strict';
 
+
 module.exports = (sequelize, DataTypes) => {
+  const emptyArray = [];
   const TweetItem = sequelize.define('TweetItem', {
     id: {
         allowNull: false,
@@ -17,12 +19,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
        likes: {
-        allowNull: true,
+        allowNull: false,
         type: DataTypes.ARRAY(DataTypes.STRING),
+        defaultValue: emptyArray
       },
        replies: {
-        allowNull: true,
+        allowNull: false,
         type: DataTypes.ARRAY(DataTypes.STRING),
+        defaultValue: emptyArray
       },
       replyingTo: {
         allowNull: true,
