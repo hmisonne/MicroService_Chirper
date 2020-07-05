@@ -34,7 +34,7 @@ exports.show_tweet = async(req, res, next) => {
         id: req.params.tweet_id
       }
     })
-    return res.status(200).send(tweet)
+    return res.status(200).send({msg: "Success", tweet})
   } catch (error) {
     return res.status(501).json({ error: error.message})
   }
