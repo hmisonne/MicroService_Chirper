@@ -4,6 +4,13 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
+    "test": "jest",
+    "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "dependencies": {
