@@ -9,7 +9,7 @@ exports.submit_tweet = async(req, res, next) => {
       author: req.body.author,
       replyingTo: req.body.replyingTo
     })
-    return res.status(201).send({msg: "Success", tweet})
+    return res.status(201).send({success: true, tweet})
   } catch (error) {
     return res.status(500).json({ error: error.message})
   }
@@ -19,7 +19,7 @@ exports.submit_tweet = async(req, res, next) => {
 exports.show_tweets = async(req, res, next) => {
   try {
     const tweets = await models.TweetItems.findAll()
-    return res.status(200).send({msg: "Success", tweets})
+    return res.status(200).send({success: true, tweets})
   } catch (error) {
     return res.status(500).json({ error: error.message})
   }
@@ -34,9 +34,9 @@ exports.show_tweet = async(req, res, next) => {
         id: req.params.tweet_id
       }
     })
-    return res.status(200).send({msg: "Success", tweet})
+    return res.status(200).send({success: true, tweet})
   } catch (error) {
-    return res.status(501).json({ error: error.message})
+    return res.status(500).json({ error: error.message})
   }
   
 }
@@ -51,7 +51,7 @@ exports.edit_tweet = async(req, res, next) => {
         id: req.params.tweet_id
       }
     })
-    return res.status(200).send({msg: "Success"})
+    return res.status(200).send({success: true})
   } catch (error) {
     return res.status(500).json({ error: error.message})
   }
@@ -64,7 +64,7 @@ exports.delete_tweet = async(req, res, next) => {
         id: req.params.tweet_id
       }
     })
-    return res.status(200).send({msg: "Success"})
+    return res.status(200).send({success: true})
   } catch (error) {
     return res.status(500).json({ error: error.message})
   }
