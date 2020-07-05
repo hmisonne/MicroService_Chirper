@@ -1,13 +1,18 @@
 const models = require('../models')
-
+const createError = require('http-errors');
 
 
 exports.submit_tweet = async(req, res, next) => {	
   try {
+    const {text, author, replyingTo} = req.body
+    if (!text || !author){
+      return next(createError(400, "Missing text and/or author"))
+      next()
+    }
     const tweet = await models.TweetItems.create({
-      text: req.body.text,
-      author: req.body.author,
-      replyingTo: req.body.replyingTo
+      text,
+      author,
+      replyingTo
     })
     return res.status(201).send({success: true, tweet})
   } catch (error) {
@@ -44,6 +49,12 @@ exports.show_tweet = async(req, res, next) => {
 
 exports.edit_tweet = async(req, res, next) => {
 	 try {
+    // Check if tweetId exist
+    const tweet = await models.TweetItems.findOne({
+      where: {
+        id: req.params.tweet_id
+      }
+    })
     await models.TweetItems.update({
       text: req.body.tweet_text
       }, {
