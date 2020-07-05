@@ -4,7 +4,7 @@ const models = require('../models')
 
 exports.submit_tweet = async(req, res, next) => {	
   try {
-    const tweet = await models.TweetItem.create({
+    const tweet = await models.TweetItems.create({
       text: req.body.text,
       author: req.body.author,
       replyingTo: req.body.replyingTo
@@ -18,8 +18,8 @@ exports.submit_tweet = async(req, res, next) => {
 
 exports.show_tweets = async(req, res, next) => {
   try {
-    const tweets = await models.TweetItem.findAll()
-    return res.status(200).send(tweets)
+    const tweets = await models.TweetItems.findAll()
+    return res.status(200).send({msg: "Success", tweets})
   } catch (error) {
     return res.status(500).json({ error: error.message})
   }
@@ -29,14 +29,14 @@ exports.show_tweets = async(req, res, next) => {
 
 exports.show_tweet = async(req, res, next) => {
   try {
-    const tweet = await models.TweetItem.findOne({
+    const tweet = await models.TweetItems.findOne({
       where: {
         id: req.params.tweet_id
       }
     })
     return res.status(200).send(tweet)
   } catch (error) {
-    return res.status(500).json({ error: error.message})
+    return res.status(501).json({ error: error.message})
   }
   
 }
@@ -44,7 +44,7 @@ exports.show_tweet = async(req, res, next) => {
 
 exports.edit_tweet = async(req, res, next) => {
 	 try {
-    await models.TweetItem.update({
+    await models.TweetItems.update({
       text: req.body.tweet_text
       }, {
       where: {
@@ -59,7 +59,7 @@ exports.edit_tweet = async(req, res, next) => {
 
 exports.delete_tweet = async(req, res, next) => {
 	try {
-    await models.TweetItem.destroy({
+    await models.TweetItems.destroy({
       where: {
         id: req.params.tweet_id
       }

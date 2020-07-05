@@ -3,7 +3,7 @@
 
 module.exports = (sequelize, DataTypes) => {
   const emptyArray = [];
-  const TweetItem = sequelize.define('TweetItem', {
+  const TweetItems = sequelize.define('TweetItems', {
     id: {
         allowNull: false,
         primaryKey: true,
@@ -33,5 +33,5 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
   })
-  return TweetItem
+  return TweetItems
 }
