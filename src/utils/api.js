@@ -52,7 +52,7 @@ export async function _getTweets () {
   })
   const tweetList = await response.json()
   let tweetObject = {}
-  for (const tweet of tweetList){
+  for (const tweet of tweetList.tweets){
     tweetObject[tweet.id] = tweet
   }
   return tweetObject
