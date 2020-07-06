@@ -44,6 +44,18 @@ export async function modifyTweet (info) {
   })
 }
 
+export async function replyToTweet (info) {
+  console.log('info', info)
+  return fetch(`${apiEndpoint}/${info.parentId}`,{
+    method: 'PATCH',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({replies: info.childId}),
+  })
+}
+
 export async function removeTweet (tweet_id) {
   fetch(`${apiEndpoint}/${tweet_id}`,{
     method: 'Delete',

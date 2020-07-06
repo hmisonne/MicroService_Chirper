@@ -1,4 +1,4 @@
-import { saveLikeToggle, saveTweet, removeTweet, modifyTweet } from '../utils/api'
+import { saveLikeToggle, saveTweet, removeTweet, modifyTweet, replyToTweet } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 export const RECEIVE_TWEETS = 'RECEIVE_TWEETS'
 export const TOGGLE_TWEET = 'TOGGLE_TWEET'
@@ -81,7 +81,13 @@ export function handleAddTweets(text, replyingTo) {
 			replyingTo
 		})
 		.then((response)=> response.json())
-		.then(data => dispatch(addTweet(data.tweet)))
+		.then(data => {
+			replyToTweet({
+				parentId: replyingTo,
+				childId: data.tweet.id,
+			})
+			dispatch(addTweet(data.tweet))
+		})
 		.then(()=> dispatch(hideLoading()))
 	}
 }
