@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const env = process.env.NODE_ENV || 'development';
-const path = require('path');
-const config = require(path.join(__dirname, '../../', 'config/database.json'))[env];
 const Axios = require('axios')
 
 const tweetRouter = require('./tweet/routes/tweet.router')
@@ -16,7 +13,6 @@ async function requireAuth(req, res, next) {
     }
     try {
         const token = await verifyToken(req.headers.authorization)
-        console.log('to', token)
         return next();
     } catch(e) {
         return res.status(500).send({auth: false, message: 'Failed to authenticate.'});
@@ -38,7 +34,6 @@ function getToken(authHeader) {
 
 async function verifyToken(authHeader) {
     const token = getToken(authHeader)
-    console.log('to1', token)
     let cert;
     try {
         const response = await Axios.get(jwksUrl);
