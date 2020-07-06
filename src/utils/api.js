@@ -32,6 +32,18 @@ export async function saveTweet (info) {
   })
 }
 
+export async function modifyTweet (info) {
+  console.log('info', info)
+  return fetch(`${apiEndpoint}/${info.id}`,{
+    method: 'PATCH',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({text: info.text}),
+  })
+}
+
 export async function removeTweet (tweet_id) {
   fetch(`${apiEndpoint}/${tweet_id}`,{
     method: 'Delete',

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateTweet } from '../actions/tweets'
+import { handleUpdateTweet } from '../actions/tweets'
 import { Redirect } from 'react-router-dom'
 import NewTweetText from './NewTweetText'
 
@@ -11,7 +11,7 @@ class UpdateTweet extends Component {
   handleSubmit = (text) => {
     const {dispatch, tweet } = this.props
 
-    dispatch(updateTweet({text, id: tweet.id}))
+    dispatch(handleUpdateTweet({text, id: tweet.id}))
     this.setState(()=>({
       toHome: true
     }))

@@ -1,4 +1,4 @@
-import { saveLikeToggle, saveTweet, removeTweet } from '../utils/api'
+import { saveLikeToggle, saveTweet, removeTweet, modifyTweet } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 export const RECEIVE_TWEETS = 'RECEIVE_TWEETS'
 export const TOGGLE_TWEET = 'TOGGLE_TWEET'
@@ -82,6 +82,20 @@ export function handleAddTweets(text, replyingTo) {
 		})
 		.then((response)=> response.json())
 		.then(data => dispatch(addTweet(data.tweet)))
+		.then(()=> dispatch(hideLoading()))
+	}
+}
+
+export function handleUpdateTweet({id, text}) {
+	return (dispatch, getState) => {
+		dispatch(showLoading())
+		
+		return modifyTweet({
+			id,
+			text
+		})
+		.then((response)=> response.json())
+		.then(data => dispatch(updateTweet({id, text})))
 		.then(()=> dispatch(hideLoading()))
 	}
 }
