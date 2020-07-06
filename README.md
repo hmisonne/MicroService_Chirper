@@ -16,7 +16,10 @@ To develop these features I created actions to be dispatched to reducers to upda
 
 ### Pre-requisites and Local Development
 
-Developers using this project should already have node installed on their local machines.
+- Node
+- Postgres
+
+## Create postgres role to create db
 
 ## About the stack
 
@@ -98,7 +101,16 @@ Example Response:
 |-----------------|----------------|----------------|
 | `PATCH /tweet/:id` | Edit Tweet Text, or add replies, likes | **text** (optional) - [String] TBD . |
 
+## Test
+
+To add testing to my project I followed this great [tutorial](https://levelup.gitconnected.com/building-an-express-api-with-sequelize-cli-and-unit-testing-882c6875ed59)
+
 ## Acknowledgements
 
 I want to thank Udacity for providing the framework and guidelines for this great project.
 
+[Express Node tutorial](https://www.youtube.com/watch?v=G8uL0lFFoN0&t=5790s)
+
+## Todo
+
+Add authentification
