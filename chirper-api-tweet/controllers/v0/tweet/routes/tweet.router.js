@@ -1,6 +1,6 @@
 const models = require('../models')
 const createError = require('http-errors');
-
+const sequelize = require('sequelize');
 
 exports.submit_tweet = async(req, res, next) => {	
   try {
@@ -49,19 +49,31 @@ exports.show_tweet = async(req, res, next) => {
 
 exports.edit_tweet = async(req, res, next) => {
 	 try {
+    const { text, replies } = req.body
     // Check if tweetId exist
     const tweet = await models.TweetItems.findOne({
       where: {
         id: req.params.tweet_id
       }
     })
-    await models.TweetItems.update({
-      text: req.body.tweet_text
-      }, {
-      where: {
-        id: req.params.tweet_id
-      }
-    })
+    if (replies) {
+      await models.TweetItems.update({
+        text: req.body.text,
+        replies: sequelize.fn('array_append', sequelize.col('replies'), req.body.replies)
+        }, {
+        where: {
+          id: req.params.tweet_id
+        }
+      })
+    } else {
+      await models.TweetItems.update({
+        text: req.body.text}, {
+        where: {
+          id: req.params.tweet_id
+        }
+      })
+    }
+   
     return res.status(200).send({success: true})
   } catch (error) {
     return res.status(500).json({ error: error.message})
