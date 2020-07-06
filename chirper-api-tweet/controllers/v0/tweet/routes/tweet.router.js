@@ -16,7 +16,7 @@ exports.submit_tweet = async(req, res, next) => {
     })
     return res.status(201).send({success: true, tweet})
   } catch (error) {
-    return res.status(500).json({ error: error.message})
+    return res.status(500).json({success: false, error: error.message})
   }
   
 }
@@ -26,7 +26,7 @@ exports.show_tweets = async(req, res, next) => {
     const tweets = await models.TweetItems.findAll()
     return res.status(200).send({success: true, tweets})
   } catch (error) {
-    return res.status(500).json({ error: error.message})
+    return res.status(500).json({success: false, error: error.message})
   }
   
 }
@@ -41,7 +41,7 @@ exports.show_tweet = async(req, res, next) => {
     })
     return res.status(200).send({success: true, tweet})
   } catch (error) {
-    return res.status(500).json({ error: error.message})
+    return res.status(500).json({success: false, error: error.message})
   }
   
 }
@@ -50,8 +50,12 @@ exports.show_tweet = async(req, res, next) => {
 exports.edit_tweet = async(req, res, next) => {
 	 try {
     const { text, replies } = req.body
+    if (!text && !replies){
+      return next(createError(400, "Missing text and/or replies"))
+      next()
+    }
     // Check if tweetId exist
-    const tweet = await models.TweetItems.findOne({
+    await models.TweetItems.findOne({
       where: {
         id: req.params.tweet_id
       }
@@ -76,12 +80,18 @@ exports.edit_tweet = async(req, res, next) => {
    
     return res.status(200).send({success: true})
   } catch (error) {
-    return res.status(500).json({ error: error.message})
+    return res.status(500).json({success: false, error: error.message})
   }
 }
 
 exports.delete_tweet = async(req, res, next) => {
 	try {
+    // Check if tweetId exist
+    await models.TweetItems.findOne({
+      where: {
+        id: req.params.tweet_id
+      }
+    })
     await models.TweetItems.destroy({
       where: {
         id: req.params.tweet_id
@@ -89,6 +99,6 @@ exports.delete_tweet = async(req, res, next) => {
     })
     return res.status(200).send({success: true})
   } catch (error) {
-    return res.status(500).json({ error: error.message})
+    return res.status(500).json({success: false, error: error.message})
   }
 }
