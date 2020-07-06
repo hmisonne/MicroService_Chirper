@@ -59,7 +59,7 @@ exports.edit_tweet = async(req, res, next) => {
     if (replies) {
       await models.TweetItems.update({
         text: req.body.text,
-        replies: sequelize.fn('array_append', sequelize.col('replies'), req.body.replies)
+        replies: sequelize.fn('array_append', sequelize.col('replies'), replies)
         }, {
         where: {
           id: req.params.tweet_id
