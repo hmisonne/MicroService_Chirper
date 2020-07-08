@@ -69,7 +69,7 @@ export function updateTweet({id, text}) {
 	}
 }
 
-export function handleAddTweets(text, replyingTo) {
+export function handleAddTweets(text, replyingTo, token) {
 	return (dispatch, getState) => {
 		const {authedUser} = getState()
 
@@ -79,13 +79,13 @@ export function handleAddTweets(text, replyingTo) {
 			author: authedUser, 
 			text, 
 			replyingTo
-		})
+		}, token)
 		.then((response)=> response.json())
 		.then(data => {
-			replyToTweet({
-				parentId: replyingTo,
-				childId: data.tweet.id,
-			})
+			// replyToTweet({
+			// 	parentId: replyingTo,
+			// 	childId: data.tweet.id,
+			// })
 			dispatch(addTweet(data.tweet))
 		})
 		.then(()=> dispatch(hideLoading()))

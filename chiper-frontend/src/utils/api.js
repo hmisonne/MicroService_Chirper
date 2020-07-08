@@ -21,12 +21,13 @@ export function saveLikeToggle (info) {
 }
 
 
-export async function saveTweet (info) {
+export async function saveTweet (info, token) {
   return fetch(`${apiEndpoint}/`,{
     method: 'POST',
     mode: 'cors',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `bearer ${token}`
     },
     body: JSON.stringify(info),
   })
@@ -46,13 +47,13 @@ export async function modifyTweet (info) {
 
 export async function replyToTweet (info) {
   console.log('info', info)
-  return fetch(`${apiEndpoint}/${info.parentId}`,{
-    method: 'PATCH',
+  return fetch(`${apiEndpoint}/${info.parentId}/comment`,{
+    method: 'POST',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({replies: info.childId}),
+    body: JSON.stringify({text: 'text', author: 'author'}),
   })
 }
 

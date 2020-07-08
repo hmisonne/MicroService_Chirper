@@ -12,8 +12,8 @@ class NewTweet extends Component {
   handleSubmit = (text) => {
     const {dispatch, id } = this.props
     const {toHome} = this.state
-
-    dispatch(handleAddTweets(text, id))
+    const token = this.props.auth.getIdToken()
+    dispatch(handleAddTweets(text, id, token))
     this.setState(()=>({
       toHome: id ? false : true
     }))
