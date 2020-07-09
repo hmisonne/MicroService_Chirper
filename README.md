@@ -41,65 +41,59 @@ The following endpoints are available:
 | Endpoint       | Usage          | Params         |
 |-----------------|----------------|----------------|
 | `GET /tweet` | Get all of the tweets | |
-
-Example Response:
-
-```json
-[
-	{
-        "id": "98f9331d-459d-4f13-8d6a-4be5528bf423",
-        "text": "Hello, this is my first Tweet",
-        "author": "Angela123",
-        "likes": ["Mickael22"],
-        "replies": ["46ab8e66-f3a4-48ae-a9e4-040ca0b29186"],
-        "replyingTo": null,
-        "createdAt": "2020-07-04T17:43:37.237Z",
-        "updatedAt": "2020-07-04T17:43:37.237Z"
-    },
-    {
-        "id": "46ab8e66-f3a4-48ae-a9e4-040ca0b29186",
-        "text": "Welcome Angela!",
-        "author": "Mickael22",
-        "likes": [],
-        "replies": [],
-        "replyingTo": "98f9331d-459d-4f13-8d6a-4be5528bf423",
-        "createdAt": "2020-07-04T17:44:35.473Z",
-        "updatedAt": "2020-07-04T17:44:35.473Z"
-    }
-]
-```
-| Endpoint       | Usage          | Params         |
-|-----------------|----------------|----------------|
 | `GET /tweet/:id` | Get the details of a single tweet | |
+| `POST /tweet` | Create a new tweet | **text** - [String] <br> **author** - [String] |
+| `POST /tweet/:id/comment` | Reply to a tweet with a comment | **text** - [String] <br> **author** - [String] |
+| `PATCH /tweet/:id` | Edit Tweet Text, or add replies, likes | **text** (optional) - [String] TBD . |
+| `DELETE /tweet/:id` | Remove a tweet from the database | |
 
-Example Response:
+Example Response: `GET /tweet/:id`
 
 ```json
 {
-    "msg": "Success",
+    "success": true,
     "tweet": {
-        "id": "46ab8e66-f3a4-48ae-a9e4-040ca0b29186",
-        "text": "Welcome Angela!",
-        "author": "Mickael22",
-        "likes": [],
-        "replies": [],
-        "replyingTo": "98f9331d-459d-4f13-8d6a-4be5528bf423",
-        "createdAt": "2020-07-04T17:44:35.473Z",
-        "updatedAt": "2020-07-04T17:44:35.473Z"
+        "id": 1,
+        "text": "Hello!",
+        "author": "Angela22",
+        "createdAt": "2020-07-07T17:33:59.880Z",
+        "updatedAt": "2020-07-07T17:33:59.880Z",
+        "comments": [
+            {
+                "id": 1,
+                "text": "Welcome Angela!",
+                "author": "Bobby",
+                "createdAt": "2020-07-07T17:34:54.789Z",
+                "updatedAt": "2020-07-07T17:34:54.789Z",
+                "tweetId": 1
+            }
+        ]
     }
 }
 ```
-| Endpoint       | Usage          | Params         |
-|-----------------|----------------|----------------|
-| `POST /tweet` | Create a new tweet | **text** - [String] <br> **author** - [String] <br> **replyingTo** (optional) - Should match a tweet id in the database. |
+Example Response : `GET /tweet`
 
-| Endpoint       | Usage          | Params         |
-|-----------------|----------------|----------------|
-| `DELETE /tweet/:id` | Remove a tweet from the database | |
-
-| Endpoint       | Usage          | Params         |
-|-----------------|----------------|----------------|
-| `PATCH /tweet/:id` | Edit Tweet Text, or add replies, likes | **text** (optional) - [String] TBD . |
+```json
+{
+    "success": true,
+    "tweets": [
+        {
+            "id": 1,
+            "text": "Hello!",
+            "author": "Angela22",
+            "createdAt": "2020-07-07T17:33:59.880Z",
+            "updatedAt": "2020-07-07T17:33:59.880Z"
+        },
+        {
+            "id": 2,
+            "text": "Welcome",
+            "author": "Patricia",
+            "createdAt": "2020-07-08T00:57:49.863Z",
+            "updatedAt": "2020-07-08T00:57:49.864Z"
+        },
+    ]
+}
+```
 
 ## Test
 
