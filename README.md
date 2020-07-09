@@ -14,12 +14,18 @@ To develop these features I created actions to be dispatched to reducers to upda
 
 ## Getting started
 
-### Pre-requisites and Local Development
+### Pre-requisites for Local Development
 
-- Node
+- npm, run npm i under chirper-api-tweet to install all the dependencies
 - Postgres
-
-## Create postgres role to create db
+    -  Replace the config value with your own values on chirper-api-tweet/src/config/config.ts
+```javascript
+export const config = {
+  'username': 'POSTGRES_USERNAME',
+  'password': 'POSTGRES_PASSWORD',
+  'database': 'POSTGRES_DB_NAME',
+}
+```
 
 ## About the stack
 
