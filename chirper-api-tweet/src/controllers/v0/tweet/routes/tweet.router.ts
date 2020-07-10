@@ -51,7 +51,9 @@ async function verifyToken(authHeader: any) {
 router.get('/',
     async (req: Request, res: Response) => {
       const {id} = req.params;
-      const tweets = await TweetItems.findAll();
+      const tweets = await TweetItems.findAll({
+        include: [CommentItems],
+    });
       res.send({success: true, tweets});
     });
 
