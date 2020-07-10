@@ -3,12 +3,11 @@ import { Dimmer, Loader } from 'semantic-ui-react'
 
 function Callback() {
   return (
-  	<div>Hello</div>
+  	<Dimmer active>
+      <Loader content="Loading" />
+    </Dimmer>
 
   )
 }
 
 export default Callback
-    // <Dimmer active>
-    //   <Loader content="Loading" />
-    // </Dimmer>
