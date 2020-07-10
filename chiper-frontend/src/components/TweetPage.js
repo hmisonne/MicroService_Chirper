@@ -25,14 +25,13 @@ class TweetPage extends Component {
 }
 
 function mapStateToProps ({ authedUser, tweets, users }, props) {
-  console.log('params', props)
 	const { id } = props.match.params
 
   return {
     id,
-    replies: !tweets[id]
+    replies: !tweets[id] || !tweets[id].comments
       ? []
-      : tweets[id].replies.sort((a,b,) => tweets[b].timestamp - tweets[a].timestamp)
+      : tweets[id].comments.sort((a,b,) => tweets[b].timestamp - tweets[a].timestamp)
   }
 }
 
