@@ -13,9 +13,9 @@ class TweetPage extends Component {
         <NewTweet id={id} />
         {replies.length !== 0 && <h3 className='center'>Replies</h3>}
         <ul>
-          {replies.map((replyId) => (
-            <li key={replyId}>
-              <Tweet id={replyId}/>
+          {replies.map((comment) => (
+            <li key={comment.id}>
+              <div>{comment.text}</div>
             </li>
           ))}
         </ul>
@@ -31,8 +31,12 @@ function mapStateToProps ({ authedUser, tweets, users }, props) {
     id,
     replies: !tweets[id] || !tweets[id].comments
       ? []
-      : tweets[id].comments.sort((a,b,) => tweets[b].timestamp - tweets[a].timestamp)
+      : tweets[id].comments.sort((a,b,) => tweets[b].createdAt - tweets[a].createdAt)
   }
 }
 
 export default connect(mapStateToProps)(TweetPage) 
+
+{/* <li key={comment.id}>
+<Tweet id={replyId}/>
+</li> */}
