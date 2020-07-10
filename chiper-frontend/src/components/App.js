@@ -84,7 +84,8 @@ class App extends Component {
 			  	? null
 			  	: 
 			  	<div>
-				 <Route
+					<Switch>
+				 		<Route
 				          path="/"
 				          exact
 				          render={props => {
@@ -115,7 +116,7 @@ class App extends Component {
 				        
 
 				        <Route component={NotFound} />
-
+					</Switch>
 			  	</div>
 			  	
 				   }
