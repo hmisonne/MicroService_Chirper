@@ -3,7 +3,8 @@ import {
 	TOGGLE_TWEET,
 	ADD_TWEET,
 	UPDATE_TWEET_TEXT,
-	DELETE_TWEET 
+	DELETE_TWEET,
+	ADD_COMMENT
 } from '../actions/tweets'
 
 import { omit } from 'lodash'
@@ -42,7 +43,9 @@ export default function tweets (state={}, action) {
 				[tweet.id]: tweet,
 				// ...replyingTo,
 			}
-
+		case ADD_COMMENT:
+			// TO DO
+			return state
 		case DELETE_TWEET:
 			const tweet2 = action.tweet
 			let replyingToTweet = {}

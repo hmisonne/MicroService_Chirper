@@ -47,13 +47,13 @@ export async function modifyTweet (info) {
 
 export async function replyToTweet (info) {
   console.log('info', info)
-  return fetch(`${apiEndpoint}/${info.parentId}/comment`,{
+  return fetch(`${apiEndpoint}/${info.replyingTo}/comment`,{
     method: 'POST',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({text: 'text', author: 'author'}),
+    body: JSON.stringify({text: info.text, author: info.author}),
   })
 }
 

@@ -19,6 +19,7 @@ class NewTweet extends Component {
     }))
   }
 	render() {
+    console.log('props',this.props)
     const { toHome} = this.state
     if (toHome === true) {
       return <Redirect to='/' />

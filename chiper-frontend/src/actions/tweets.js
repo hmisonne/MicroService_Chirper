@@ -5,6 +5,7 @@ export const TOGGLE_TWEET = 'TOGGLE_TWEET'
 export const ADD_TWEET = 'ADD_TWEET'
 export const DELETE_TWEET = 'DELETE_TWEET'
 export const UPDATE_TWEET_TEXT ='UPDATE_TWEET_TEXT'
+export const ADD_COMMENT = 'ADD_COMMENT'
 
 export function receiveTweets(tweets) {
 	return {
@@ -42,6 +43,13 @@ export function addTweet(tweet) {
 	}
 }
 
+export function addComment(tweet) {
+	return {
+		type: ADD_COMMENT,
+		tweet,
+	}
+}
+
 export function handleDeleteTweet(tweet) {
 	return (dispatch) => {
 		dispatch(deleteTweet(tweet))
@@ -69,7 +77,7 @@ export function updateTweet({id, text}) {
 	}
 }
 
-export function handleAddTweets(text, replyingTo, token) {
+export function handleAddTweets(text, token) {
 	return (dispatch, getState) => {
 		const {authedUser} = getState()
 
@@ -77,8 +85,7 @@ export function handleAddTweets(text, replyingTo, token) {
 		
 		return saveTweet({
 			author: authedUser, 
-			text, 
-			replyingTo
+			text,
 		}, token)
 		.then((response)=> response.json())
 		.then(data => {
@@ -87,6 +94,25 @@ export function handleAddTweets(text, replyingTo, token) {
 			// 	childId: data.tweet.id,
 			// })
 			dispatch(addTweet(data.tweet))
+		})
+		.then(()=> dispatch(hideLoading()))
+	}
+}
+
+export function handleAddComments(text, replyingTo, token) {
+	return (dispatch, getState) => {
+		const {authedUser} = getState()
+
+		dispatch(showLoading())
+		
+		return replyToTweet({
+			author: authedUser, 
+			text, 
+			replyingTo
+		}, token)
+		.then((response)=> response.json())
+		.then(data => {
+			dispatch(addComment(data.tweet))
 		})
 		.then(()=> dispatch(hideLoading()))
 	}
