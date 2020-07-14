@@ -1,6 +1,6 @@
 # Chirper Project
 
-Chirper is an app to post and reply to tweets. The front-end architecture was taken from another project: (go to initial project)[https://github.com/hmisonne/UdacityReact/tree/master/00_reactnd-chirper-app-master]. 
+Chirper is an app to post and reply to tweets. The front-end architecture was taken from another project: [go to initial project](https://github.com/hmisonne/UdacityReact/tree/master/00_reactnd-chirper-app-master). 
 I decided to build the back-end of this app with Node.JS and TypeScript and to deploy this app on the cloud through AWS with microservices.
 
 ![Chirper Demo](demo/Chirper.gif)
