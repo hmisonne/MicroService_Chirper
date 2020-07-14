@@ -1,14 +1,7 @@
 # Chirper Project
 
-This project was created by Udacity and is part of the [React Nanodegree program](https://www.udacity.com/course/react-nanodegree--nd019).
-This is a react app where users can post see all the tweets and can also write new tweets, reply to other tweets, and "like" ! 
-This react app is using redux to manage the state of the tweets, users, and user authentificated of the application.
-
-Most of the commits in this repository correspond to videos in the program however I decided to implement other features:
-- A delete button
-- An update button 
-
-To develop these features I created actions to be dispatched to reducers to update the store as well as asyncronous calls to update the database through redux thank.
+Chirper is an app to post and reply to tweets. The front-end architecture was taken from another project: (go to initial project)[https://github.com/hmisonne/UdacityReact/tree/master/00_reactnd-chirper-app-master]. 
+I decided to build the back-end of this app with Node.JS and TypeScript and to deploy this app on the cloud through AWS with microservices.
 
 ![Chirper Demo](demo/Chirper.gif)
 
