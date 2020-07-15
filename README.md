@@ -81,7 +81,17 @@ Example Response : `GET /tweet`
             "text": "Hello!",
             "author": "Angela22",
             "createdAt": "2020-07-07T17:33:59.880Z",
-            "updatedAt": "2020-07-07T17:33:59.880Z"
+            "updatedAt": "2020-07-07T17:33:59.880Z",
+            "comments": [
+                {
+                    "id": 1,
+                    "text": "Welcome Angela!",
+                    "author": "Bobby",
+                    "createdAt": "2020-07-07T17:34:54.789Z",
+                    "updatedAt": "2020-07-07T17:34:54.789Z",
+                    "tweetId": 1
+                }
+            ]
         },
         {
             "id": 2,
