@@ -110,8 +110,6 @@ To add testing to my project I followed this great [tutorial](https://levelup.gi
 
 ## Acknowledgements
 
-I want to thank Udacity for providing the framework and guidelines for this great project.
-
 [Express Node tutorial](https://www.youtube.com/watch?v=G8uL0lFFoN0&t=5790s)
 
 ## Todo
