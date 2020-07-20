@@ -43,10 +43,10 @@ export function addTweet(tweet) {
 	}
 }
 
-export function addComment(tweet) {
+export function addComment(comment) {
 	return {
 		type: ADD_COMMENT,
-		tweet,
+		comment,
 	}
 }
 
@@ -74,6 +74,25 @@ export function updateTweet({id, text}) {
 		type: UPDATE_TWEET_TEXT,
 		text,
 		id
+	}
+}
+
+export function handleReplyToTweet(text, id, token) {
+	return (dispatch, getState) => {
+		const {authedUser} = getState()
+
+		dispatch(showLoading())
+		
+		return replyToTweet({
+			author: authedUser, 
+			text,
+			replyingTo: id
+		}, token)
+		.then((response)=> response.json())
+		.then(data => {
+			dispatch(addComment(data.comment))
+		})
+		.then(()=> dispatch(hideLoading()))
 	}
 }
 

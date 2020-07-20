@@ -28,24 +28,19 @@ export default function tweets (state={}, action) {
 			}
 		case ADD_TWEET:
 			const {tweet} = action
-
-			// let replyingTo = {}
-			// if (tweet.replyingTo !== null) {
-			// 	replyingTo = {
-			// 		[tweet.replyingTo]: {
-			// 			...state[tweet.replyingTo],
-			// 			replies: state[tweet.replyingTo].replies.concat([tweet.id])
-			// 		}
-			// 	}
-			// }
 			return {
 				...state, 
 				[tweet.id]: tweet,
-				// ...replyingTo,
 			}
 		case ADD_COMMENT:
-			// TO DO
-			return state
+			const {comment} = action
+			return {
+				...state, 
+				[comment.tweetId]: {
+					...state[comment.tweetId],
+					comments: state[comment.tweetId].comments.concat([action.comment])
+				},
+			}
 		case DELETE_TWEET:
 			const tweet2 = action.tweet
 			let replyingToTweet = {}
