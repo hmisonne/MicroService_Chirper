@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { handleAddTweets } from '../actions/tweets'
+import { handleAddTweets, handleReplyToTweet} from '../actions/tweets'
 import { Redirect } from 'react-router-dom'
 import NewTweetText from './NewTweetText'
 
@@ -12,14 +12,14 @@ class NewTweet extends Component {
   handleSubmit = (text) => {
     const {dispatch, id } = this.props
     const {toHome} = this.state
-    const token = this.props.auth.getIdToken()
-    dispatch(handleAddTweets(text, id, token))
+    const token = localStorage.getItem('idToken')
+    id ? dispatch(handleReplyToTweet(text, id, token))
+    : dispatch(handleAddTweets(text, token))
     this.setState(()=>({
       toHome: id ? false : true
     }))
   }
 	render() {
-    console.log('props',this.props)
     const { toHome} = this.state
     if (toHome === true) {
       return <Redirect to='/' />
