@@ -69,8 +69,10 @@ class App extends Component {
     generateCurrentPage() {
 	    if (!this.props.auth.isAuthenticated()) {
 	      return (<LogIn auth={this.props.auth} />)
-    	}
-	this.props.dispatch(handleInitialData())
+		}
+
+	const token = localStorage.getItem('idToken')
+	this.props.dispatch(handleInitialData(token))
     return (
     	<Fragment>
 			<LoadingBar />

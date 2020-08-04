@@ -1,19 +1,27 @@
 import {
   _getUsers,
   _saveLikeToggle,
-  _saveTweet,
+  _saveTweet
 } from './_DATA.js'
 
 import { apiEndpoint } from '../config'
 
-export function getInitialData () {
+export function getInitialData (token) {
   return Promise.all([
     _getUsers(),
     _getTweets(),
-  ]).then(([users, tweets]) => ({
+    _getAuthedUser(token),
+  ]).then(([users, tweets, authedId]) => ({
     users,
     tweets,
+    authedId
   }))
+}
+
+export async function _getAuthedUser(token) {
+  return new Promise((res, rej) => {
+    setTimeout(() => res({authedId: 'tylermcginnis'}), 1000)
+  })
 }
 
 export function saveLikeToggle (info) {

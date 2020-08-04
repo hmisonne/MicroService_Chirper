@@ -36,7 +36,3 @@ function mapStateToProps ({ authedUser, tweets, users }, props) {
 }
 
 export default connect(mapStateToProps)(TweetPage) 
-
-{/* <li key={comment.id}>
-<Tweet id={replyId}/>
-</li> */}
