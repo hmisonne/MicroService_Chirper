@@ -14,7 +14,7 @@ class Tweet extends Component {
 		dispatch(handleToggleTweets({
 			id: tweet.id,
 			hasLiked: tweet.hasLiked,
-			authedUser, 
+			authedUser: authedUser.userId, 
 		}))
 	}
   toUpdate = (e, id) => {
@@ -67,7 +67,7 @@ class Tweet extends Component {
                 : <TiHeartOutline className='tweet-icon'/>}
             </button>
             <span>{likes !== 0 && likes}</span>
-            {authedUser === author_id && 
+            {authedUser.userId === author_id && 
               <div>
               <button className='trash-button' onClick={this.handleDelete}>
                 <TiTrash className='tweet-icon' />

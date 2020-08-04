@@ -84,7 +84,7 @@ export function handleReplyToTweet(text, id, token) {
 		dispatch(showLoading())
 		
 		return replyToTweet({
-			author: authedUser, 
+			author: authedUser.name, 
 			text,
 			replyingTo: id
 		}, token)
@@ -103,7 +103,7 @@ export function handleAddTweets(text, token) {
 		dispatch(showLoading())
 		
 		return saveTweet({
-			author: authedUser, 
+			author: authedUser.name, 
 			text,
 		}, token)
 		.then((response)=> response.json())
@@ -125,7 +125,7 @@ export function handleAddComments(text, replyingTo, token) {
 		dispatch(showLoading())
 		
 		return replyToTweet({
-			author: authedUser, 
+			author: authedUser.name, 
 			text, 
 			replyingTo
 		}, token)

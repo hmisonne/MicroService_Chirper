@@ -27,9 +27,9 @@ export async function _getAuthedUser(token) {
       'Authorization': `bearer ${token}`
     },
   })
-  const authedUser = await response.json()
+  const result = await response.json()
 
-  return authedUser
+  return result.user
   // return new Promise((res, rej) => {
   //   setTimeout(() => res({authedId: 'tylermcginnis'}), 1000)
   // })
