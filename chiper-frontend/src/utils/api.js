@@ -4,24 +4,35 @@ import {
   _saveTweet
 } from './_DATA.js'
 
-import { apiEndpoint } from '../config'
+import { apiTweet, apiUser } from '../config'
 
 export function getInitialData (token) {
   return Promise.all([
     _getUsers(),
     _getTweets(),
     _getAuthedUser(token),
-  ]).then(([users, tweets, authedId]) => ({
+  ]).then(([users, tweets, authedUser]) => ({
     users,
     tweets,
-    authedId
+    authedUser
   }))
 }
 
 export async function _getAuthedUser(token) {
-  return new Promise((res, rej) => {
-    setTimeout(() => res({authedId: 'tylermcginnis'}), 1000)
+  const response = await fetch(`${apiUser}/`,{
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `bearer ${token}`
+    },
   })
+  const authedUser = await response.json()
+
+  return authedUser
+  // return new Promise((res, rej) => {
+  //   setTimeout(() => res({authedId: 'tylermcginnis'}), 1000)
+  // })
 }
 
 export function saveLikeToggle (info) {
@@ -30,7 +41,7 @@ export function saveLikeToggle (info) {
 
 
 export async function saveTweet (info, token) {
-  return fetch(`${apiEndpoint}/`,{
+  return fetch(`${apiTweet}/`,{
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -43,7 +54,7 @@ export async function saveTweet (info, token) {
 
 export async function modifyTweet (info) {
   console.log('info', info)
-  return fetch(`${apiEndpoint}/${info.id}`,{
+  return fetch(`${apiTweet}/${info.id}`,{
     method: 'PATCH',
     mode: 'cors',
     headers: {
@@ -55,7 +66,7 @@ export async function modifyTweet (info) {
 
 export async function replyToTweet (info) {
   console.log('info', info)
-  return fetch(`${apiEndpoint}/${info.replyingTo}/comment`,{
+  return fetch(`${apiTweet}/${info.replyingTo}/comment`,{
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -66,7 +77,7 @@ export async function replyToTweet (info) {
 }
 
 export async function removeTweet (tweet_id) {
-  fetch(`${apiEndpoint}/${tweet_id}`,{
+  fetch(`${apiTweet}/${tweet_id}`,{
     method: 'Delete',
     mode: 'cors',
     headers: {
@@ -76,7 +87,7 @@ export async function removeTweet (tweet_id) {
 }
 
 export async function _getTweets () {
-  const response = await fetch(`${apiEndpoint}/`,{
+  const response = await fetch(`${apiTweet}/`,{
     method: 'GET',
     mode: 'cors',
     headers: {

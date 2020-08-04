@@ -1,4 +1,5 @@
-export const apiEndpoint = `http://localhost:8080/api/v0/tweet`
+export const apiTweet = `http://localhost:8080/api/v0/tweet`
+export const apiUser = `http://localhost:8080/api/v0/user`
 
 export const authConfig = {
   domain: 'fsnd-hm.auth0.com',            // Auth0 domain

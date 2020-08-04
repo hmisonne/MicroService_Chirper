@@ -10,10 +10,10 @@ export function handleInitialData () {
 	return dispatch => {
 		dispatch(showLoading())
 		return getInitialData()
-			.then(({users,tweets, authedId})=>{
+			.then(({users,tweets, authedUser})=>{
 				dispatch(receiveUsers(users))
 				dispatch(receiveTweets(tweets))
-				dispatch(setAuthedUser(authedId))
+				dispatch(setAuthedUser(authedUser))
 				dispatch(hideLoading())
 			})
 	}
