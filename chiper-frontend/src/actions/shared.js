@@ -6,10 +6,10 @@ import { showLoading, hideLoading } from 'react-redux-loading'
 
 // const AUTHED_ID = 'tylermcginnis'
 
-export function handleInitialData () {
+export function handleInitialData (token) {
 	return dispatch => {
 		dispatch(showLoading())
-		return getInitialData()
+		return getInitialData(token)
 			.then(({users,tweets, authedUser})=>{
 				dispatch(receiveUsers(users))
 				dispatch(receiveTweets(tweets))

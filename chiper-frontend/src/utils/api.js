@@ -28,11 +28,7 @@ export async function _getAuthedUser(token) {
     },
   })
   const result = await response.json()
-
   return result.user
-  // return new Promise((res, rej) => {
-  //   setTimeout(() => res({authedId: 'tylermcginnis'}), 1000)
-  // })
 }
 
 export function saveLikeToggle (info) {
