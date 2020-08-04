@@ -22,9 +22,6 @@ class App extends Component {
 	    this.handleLogout = this.handleLogout.bind(this)
 	  }
 
-	componentDidMount(){
-		this.props.dispatch(handleInitialData())
-	}
 	handleLogin() {
 		this.props.auth.login()
 	}
@@ -73,7 +70,7 @@ class App extends Component {
 	    if (!this.props.auth.isAuthenticated()) {
 	      return (<LogIn auth={this.props.auth} />)
     	}
-
+	this.props.dispatch(handleInitialData())
     return (
     	<Fragment>
 			<LoadingBar />
@@ -85,9 +82,16 @@ class App extends Component {
 			  	: 
 			  	<div>
 					<Switch>
+						<Route
+						  path="/"
+						  exact
+				          render={props => {
+				            return <Dashboard {...props} auth={this.props.auth} />
+				          }}
+				        />
 				 		<Route
-				          path="/"
-				          exact
+						  path="/callback"
+						  exact
 				          render={props => {
 				            return <Dashboard {...props} auth={this.props.auth} />
 				          }}
