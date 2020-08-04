@@ -1,4 +1,3 @@
-import {TweetItems} from './tweet/models/TweetItems';
-import {CommentItems} from './tweet/models/CommentItems';
+import {UserItems} from './user/models/UserItems';
 
-export const V0_TWEET_MODELS = [TweetItems, CommentItems];
+export const V0_USER_MODELS = [UserItems];

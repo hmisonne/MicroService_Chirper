@@ -1,9 +1,9 @@
 import {Router, Request, Response} from 'express';
-import {TweetItems} from '../models/TweetItems';
-import {CommentItems} from '../models/CommentItems'
+import {UserItems} from '../models/UserItems';
 import {NextFunction} from 'connect';
 import * as jwt from 'jsonwebtoken';
 import Axios from 'axios'
+import { decode } from 'jsonwebtoken'
 
 const router: Router = Router();
 const jwksUrl = 'https://fsnd-hm.auth0.com/.well-known/jwks.json'
@@ -46,106 +46,56 @@ async function verifyToken(authHeader: any) {
   return jwt.verify(token, cert, { algorithms: ['RS256'] })
 }
 
+function parseUserId(jwtToken: string): string {
+  const decodedJwt = decode(jwtToken)
+  return decodedJwt.sub
+}
 
-// Fetch all tweet
+// Fetch all users
+// router.get('/',
+//     async (req: Request, res: Response) => {
+//       const users = await UserItems.findAll();
+//       res.send({success: true, users});
+//     });
+
+// Fetch user by userId using Auth Headers
 router.get('/',
     async (req: Request, res: Response) => {
-      const {id} = req.params;
-      const tweets = await TweetItems.findAll({
-        include: [CommentItems],
-    });
-      res.send({success: true, tweets});
-    });
+      const authorization = req.headers.authorization
+      const split = authorization.split(' ')
+      const jwtToken = split[1]
+      const userId = parseUserId(jwtToken)
 
-// Fetch tweet by id
-router.get('/:id',
-    async (req: Request, res: Response) => {
-      const {id} = req.params;
-      const tweet = await TweetItems.findOne({
-        where: { id },
-        include: [CommentItems],
+      const user = await UserItems.findOne({
+        where: { userId }
     });
-      res.send({success: true, tweet});
+      res.send({success: true, user});
     });
 
 
-// Create tweet
+// Create user
 router.post('/',
-    requireAuth,
+    // requireAuth,
     async (req: Request, res: Response) => {
-      const {text, author, replyingTo} = req.body
+      const {userId, name} = req.body
 
-      if (!text) {
-        return res.status(400).send({message: 'Text is required or malformed.'});
+      if (!userId) {
+        return res.status(400).send({message: 'id is required or malformed.'});
       }
 
-      if (!author) {
-        return res.status(400).send({message: 'Author is required.'});
+      if (!name) {
+        return res.status(400).send({message: 'name is required.'});
       }
 
-      const item = await new TweetItems({
-        text,
-        author
+      const item = await new UserItems({
+        userId,
+        name
       });
 
-      const tweet = await item.save();
+      const user = await item.save();
 
-      res.status(201).send({success: true, tweet});
-    });
-
-// Create feed with metadata
-router.patch('/:id',
-    async (req: Request, res: Response) => {
-      const {id} = req.params;
-      const {text} = req.body
-
-      if (!text) {
-        return res.status(400).send({message: 'Text is required or malformed.'});
-      }
-
-      const curr_tweet = await TweetItems.findByPk(id);
-      curr_tweet.text = text
-
-      const tweet = await curr_tweet.save();
-
-      res.status(201).send({success: true, tweet});
-    });
-
-router.delete('/:id',
-  async (req: Request, res: Response) => {
-    const {id} = req.params;
-
-    const curr_tweet = await TweetItems.findByPk(id);
-
-    await curr_tweet.destroy();
-
-    res.status(201).send({success: true});
-  });
-
-// Create a comment in response to a tweet
-router.post('/:id/comment',
-    async (req: Request, res: Response) => {
-      const {text, author} = req.body
-      const {id} = req.params;
-
-      if (!text) {
-        return res.status(400).send({message: 'Text is required or malformed.'});
-      }
-
-      if (!author) {
-        return res.status(400).send({message: 'Author is required.'});
-      }
-
-      const item = await new CommentItems({
-        text,
-        author,
-        tweetId: id
-      });
-
-      const comment = await item.save();
-
-      res.status(201).send({success: true, comment});
+      res.status(201).send({success: true, user});
     });
 
 
-export const TweetRouter: Router = router;
+export const UserRouter: Router = router;

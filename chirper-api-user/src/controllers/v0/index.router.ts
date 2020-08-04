@@ -1,9 +1,9 @@
 import {Router, Request, Response} from 'express';
-import {TweetRouter} from './tweet/routes/tweet.router';
+import {UserRouter} from './user/routes/user.router';
 
 const router: Router = Router();
 
-router.use('/tweet', TweetRouter);
+router.use('/user', UserRouter);
 
 router.get('/', async (req: Request, res: Response) => {
   res.send(`V0`);

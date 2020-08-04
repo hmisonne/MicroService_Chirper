@@ -1,23 +1,13 @@
-import {Table, Column, Model, CreatedAt, UpdatedAt, HasMany} from 'sequelize-typescript';
-import { CommentItems } from './CommentItems'
+import {Table, Column, Model} from 'sequelize-typescript';
+
 
 @Table
-export class TweetItems extends Model<TweetItems> {
-  @Column
-  public text!: string;
+export class UserItems extends Model<UserItems> {
 
   @Column
-  public author!: string;
+  public userId!: string;
 
   @Column
-  @CreatedAt
-  public createdAt: Date = new Date();
-
-  @Column
-  @UpdatedAt
-  public updatedAt: Date = new Date();
-
-  @HasMany(() => CommentItems)
-  comments: CommentItems[];
+  public name!: string;
 
 }
