@@ -1,7 +1,6 @@
 import {
-  _getUsers,
   _saveLikeToggle,
-  _saveTweet
+  _saveTweet,
 } from './_DATA.js'
 
 import { apiTweet, apiUser } from '../config'
@@ -29,6 +28,25 @@ export async function _getAuthedUser(token) {
   })
   const result = await response.json()
   return result.user
+}
+
+export async function _getUsers() {
+  const response = await fetch(`${apiUser}/`,{
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+  const result = await response.json()
+  const userList = result.users
+  console.log('userList',userList)
+  let users = {}
+  for (let userInfo of userList){
+    users[userInfo.userId] = userInfo
+  }
+  console.log('users',users)
+  return users
 }
 
 export function saveLikeToggle (info) {
