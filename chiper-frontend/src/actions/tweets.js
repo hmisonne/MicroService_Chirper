@@ -103,7 +103,7 @@ export function handleAddTweets(text, token) {
 		dispatch(showLoading())
 		
 		return saveTweet({
-			author: authedUser.name, 
+			author: authedUser.userId, 
 			text,
 		}, token)
 		.then((response)=> response.json())
