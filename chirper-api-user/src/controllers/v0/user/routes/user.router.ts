@@ -77,7 +77,7 @@ router.get('/user',
 router.post('/',
     // requireAuth,
     async (req: Request, res: Response) => {
-      const {userId, name} = req.body
+      const {userId, name, avatarURL} = req.body
 
       if (!userId) {
         return res.status(400).send({message: 'id is required or malformed.'});
@@ -89,7 +89,8 @@ router.post('/',
 
       const item = await new UserItems({
         userId,
-        name
+        name,
+        avatarURL
       });
 
       const user = await item.save();
