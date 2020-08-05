@@ -19,7 +19,7 @@ export function getInitialData (token) {
 }
 
 export async function _getAuthedUser(token) {
-  const response = await fetch(`${apiUser}/`,{
+  const response = await fetch(`${apiUser}/user`,{
     method: 'GET',
     mode: 'cors',
     headers: {
