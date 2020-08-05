@@ -15,6 +15,9 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
+      avatarURL: {
+        type: Sequelize.STRING,
+      }
     });
   },
   down: (queryInterface, Sequelize) => {
