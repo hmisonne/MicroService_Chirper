@@ -10,4 +10,7 @@ export class UserItems extends Model<UserItems> {
   @Column
   public name!: string;
 
+  @Column
+  public avatarURL?: string;
+
 }

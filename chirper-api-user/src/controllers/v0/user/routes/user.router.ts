@@ -52,14 +52,14 @@ function parseUserId(jwtToken: string): string {
 }
 
 // Fetch all users
-// router.get('/',
-//     async (req: Request, res: Response) => {
-//       const users = await UserItems.findAll();
-//       res.send({success: true, users});
-//     });
+router.get('/',
+    async (req: Request, res: Response) => {
+      const users = await UserItems.findAll();
+      res.send({success: true, users});
+    });
 
 // Fetch user by userId using Auth Headers
-router.get('/',
+router.get('/user',
     async (req: Request, res: Response) => {
       const authorization = req.headers.authorization
       const split = authorization.split(' ')
