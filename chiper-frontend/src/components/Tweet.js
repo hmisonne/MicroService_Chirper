@@ -37,25 +37,25 @@ class Tweet extends Component {
 			return(<p>This tweet does not exist</p>)
 		}
 		const {
-      name, avatar, timestamp, text, hasLiked, likes, replies, parent, id, author_id
+      author_name, author_avatar, timestamp, text, hasLiked, likes, replies, parent, id, author_id
     } = tweet
 
     return (
       <Link to={`/tweet/${id}`} className='tweet'>
         <img
-          src={avatar}
-          alt={`Avatar of ${name}`}
+          src={author_avatar}
+          alt={`Avatar of ${author_name}`}
           className='avatar'
         />
         <div className='tweet-info'>
           <div>
-            <span>{name}</span>
+            <span>{author_name}</span>
             <div>{formatDate(timestamp)}</div>
-            {parent && (
+            {/* {parent && (
               <button className='replying-to' onClick={(e) => this.toParent(e, parent.id)}>
                 Replying to @{parent.author}
               </button>
-            )}
+            )} */}
             <p>{text}</p>
           </div>
           <div className='tweet-icons'>
