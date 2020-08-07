@@ -37,7 +37,7 @@ class Tweet extends Component {
 			return(<p>This tweet does not exist</p>)
 		}
 		const {
-      author_name, author_avatar, timestamp, text, hasLiked, likes, replies, parent, id, author_id
+      author_name, author_avatar, timestamp, text, hasLiked, likes, replies, id, author_id
     } = tweet
 
     return (
@@ -51,11 +51,6 @@ class Tweet extends Component {
           <div>
             <span>{author_name}</span>
             <div>{formatDate(timestamp)}</div>
-            {/* {parent && (
-              <button className='replying-to' onClick={(e) => this.toParent(e, parent.id)}>
-                Replying to @{parent.author}
-              </button>
-            )} */}
             <p>{text}</p>
           </div>
           <div className='tweet-icons'>
@@ -87,11 +82,10 @@ class Tweet extends Component {
 
 function mapStateToProps({authedUser, users, tweets}, {id}){
 	const tweet = tweets[id]
-	const parentTweet = tweet ? tweets[tweet.replyingTo] : null
 	return {
 		authedUser,
 		tweet: tweet 
-			? formatTweet(tweet, users[tweet.author], authedUser, parentTweet)
+			? formatTweet(tweet, users[tweet.author], authedUser)
 			:  null
 	}
 }

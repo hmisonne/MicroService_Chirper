@@ -4,7 +4,7 @@ export function formatDate (timestamp) {
   return time.substr(0, 5) + time.slice(-2) + ' | ' + d.toLocaleDateString()
 }
 
-export function formatTweet (tweet, author, authedUser, parentTweet) {
+export function formatTweet (tweet, author, authedUser, ) {
   const { id, likes, replies, text, createdAt } = tweet
 
   return {
@@ -17,9 +17,5 @@ export function formatTweet (tweet, author, authedUser, parentTweet) {
     likes: !likes ? 0 : likes.length,
     replies: !replies ? 0 : replies.length,
     hasLiked: !likes ? false : likes.includes(authedUser),
-    // parent: !parentTweet ? null : {
-    //   author: parentTweet.author,
-    //   id: parentTweet.id,
-    // }
   }
 }

@@ -56,7 +56,8 @@ export function handleDeleteTweet(tweet) {
 		return removeTweet(tweet.id)
 			.catch(e => {
 				console.warn('Error in handleDeleteTweet: ',e)
-				dispatch(handleAddTweets(tweet.text, tweet.replyingTo))
+				const token = null
+				dispatch(handleAddTweets(tweet.text, token))
 				alert('There was an error deleting the tweet. Try again')
 			})
 	}
@@ -108,10 +109,6 @@ export function handleAddTweets(text, token) {
 		}, token)
 		.then((response)=> response.json())
 		.then(data => {
-			// replyToTweet({
-			// 	parentId: replyingTo,
-			// 	childId: data.tweet.id,
-			// })
 			dispatch(addTweet(data.tweet))
 		})
 		.then(()=> dispatch(hideLoading()))
