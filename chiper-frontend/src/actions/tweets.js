@@ -85,7 +85,7 @@ export function handleReplyToTweet(text, id, token) {
 		dispatch(showLoading())
 		
 		return replyToTweet({
-			author: authedUser.name, 
+			author: authedUser.userId, 
 			text,
 			replyingTo: id
 		}, token)
