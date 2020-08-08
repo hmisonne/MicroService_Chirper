@@ -1,0 +1,7 @@
+version: '3'
+services:
+  udagram-feed:
+    build:
+      context: ../../chirper-api-tweet
+      dockerfile: Dockerfile
+    image: hmisonne/chirper-tweet
