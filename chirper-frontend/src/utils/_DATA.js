@@ -28,7 +28,7 @@ let users = {
   Helene: {
     id: 'google-oauth2|116714951564551045727',
     name: "Helene",
-    avatarURL: "https://tylermcginnis.com/would-you-rather/dan.jpg",
+    avatarURL: null,
     tweets: [],
   }
 }
