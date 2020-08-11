@@ -21,3 +21,4 @@ install:
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push hmisonne/chirper-tweet
+  - docker push hmisonne/reverseproxy
