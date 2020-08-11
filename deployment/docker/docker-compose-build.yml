@@ -5,3 +5,8 @@ services:
       context: ../../chirper-api-tweet
       dockerfile: Dockerfile
     image: hmisonne/chirper-tweet
+  reverseproxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hmisonne/reverseproxy

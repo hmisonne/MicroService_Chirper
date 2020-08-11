@@ -9,3 +9,10 @@ services:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD 
       POSTGRES_DB: $POSTGRES_DATABASE 
       POSTGRES_HOST: $POSTGRES_HOST 
+  reverseproxy:
+    image: hmisonne/reverseproxy
+    ports:
+        - 8080:8080
+    restart: always
+    depends_on:
+      - chirper-tweet
