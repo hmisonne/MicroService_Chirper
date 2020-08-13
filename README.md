@@ -24,7 +24,7 @@ export const config = {
 
 ### Frontend Server
 
-To run this app, on your terminal, cd to 00_reactnd-chirper-app-master :
+To run this app on your local machine, cd to chirper-frontend on your terminal:
 
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
@@ -32,6 +32,11 @@ To run this app, on your terminal, cd to 00_reactnd-chirper-app-master :
 Open the localhost:3000 to view the App in development mode on the local server.
 
 ### Backend Server
+
+To run this app on your local machine, cd to chirper-api-user and chirper-api-tweet on your terminal:
+
+* install all project dependencies with `npm install`
+* start the development server with `npm run dev`
 
 #### Tweet API
 
@@ -103,6 +108,15 @@ Example Response : `GET /tweet`
     ]
 }
 ```
+#### User API
+
+The following endpoints are available:
+
+| Endpoint       | Usage          | Params         |
+|-----------------|----------------|----------------|
+| `GET /user` | Get all of the users | |
+| `GET /user/user` | Fetch user details using Auth Headers | |
+| `POST /user` | Create a new user | **userId** - [String] <br> **name** - [String] <br> **avatarURL** (optional) - [String] |
 
 ## Test
 
