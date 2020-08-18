@@ -1,4 +1,4 @@
-# Chirper Project
+    # Chirper Project
 
 Chirper is an app to post and reply to tweets. The front-end architecture was taken from another project: [go to initial project](https://github.com/hmisonne/UdacityReact/tree/master/00_reactnd-chirper-app-master). 
 I decided to build the back-end of this app with Node.JS and TypeScript and to deploy this app on the cloud through AWS with microservices.
@@ -7,7 +7,7 @@ The idea will be to containerize this application into :
 - 2 back-end APIs for users and tweets, 
 - 1 front-end server 
 - and 1 reverseproxy that will act as a load balancer.
-and orchestrate these containers using Kubernetes.
+and to orchestrate these containers using Kubernetes.
 
 For storage, 2 RDS will be deployed to each API and 1 S3 bucket to hold the users pictures.
 
