@@ -69,10 +69,8 @@ router.get('/user',
       let user = await UserItems.findOne({
         where: { userId }
       });
-      console.log('current user',user)
 
       if (user === null){
-        console.log('creating new user, useriD:',userId)
         user = await new UserItems({
           userId,
           name: `New User ${userId.substr(20)}`,
