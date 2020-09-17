@@ -66,9 +66,21 @@ router.get('/user',
       const jwtToken = split[1]
       const userId = parseUserId(jwtToken)
 
-      const user = await UserItems.findOne({
+      let user = await UserItems.findOne({
         where: { userId }
-    });
+      });
+      console.log('current user',user)
+
+      if (user === null){
+        console.log('creating new user, useriD:',userId)
+        user = await new UserItems({
+          userId,
+          name: `New User ${userId.substr(20)}`,
+          avatarURL: null
+        });
+
+        user = await user.save();
+      }
       res.send({success: true, user});
     });
 
