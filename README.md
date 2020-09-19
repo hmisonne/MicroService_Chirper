@@ -1,4 +1,4 @@
-    # Chirper Project
+# Chirper Project
 
 Chirper is an app to post and reply to tweets. The front-end architecture was taken from another project: [go to initial project](https://github.com/hmisonne/UdacityReact/tree/master/00_reactnd-chirper-app-master). 
 I decided to build the back-end of this app with Node.JS and TypeScript and to deploy this app on the cloud through AWS with microservices.
@@ -125,6 +125,52 @@ The following endpoints are available:
 | `GET /user` | Get all of the users | |
 | `GET /user/user` | Fetch user details using Auth Headers | |
 | `POST /user` | Create a new user | **userId** - [String] <br> **name** - [String] <br> **avatarURL** (optional) - [String] |
+
+## How to deploy to AWS
+
+### Set up EKS Cluster
+
+- Create a new EKS cluster on the AWS console
+- Add IAM role with AmazonEKSClusterPolicy attached.
+- Allow Public API server endpoint access
+
+### Set up EKS Node Group
+
+- Create a new Node Group
+- Add IAM role with AmazonEKSClusterPolicy attached.
+- Add IAM role with: AmazonEKSWorkerNodePolicy, - AmazonEC2ContainerRegistryReadOnly and AmazonEKS_CNI_Policy attached.
+- Choose Instance type: Small (Micro does not work)
+- Add number of nodes (min 1 max 2)
+
+### Interact with the cluster through the command line
+
+To bind the EKS cluster created in AWS to kubectl, run the command:
+```
+aws eks --region us-east-1 update-kubeconfig --name [Cluster Name]
+```
+
+How to install [kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
+
+### Deploy files
+
+Go to the deployment/k8s folder and run the command:
+
+```
+kubectl apply -f env-configmap.yml
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+```
+
+useful commands
+```
+kubectl get pods - show the pods in the cluster
+kubectl describe services - show the services in the cluster
+kubectl cluster-info - display information about the cluster
+```
+Debug commands:
+```
+kubectl exec -it {pod_name} /bin/bash
+```
 
 ## Test
 
